@@ -24,18 +24,42 @@ namespace Ketab_DataAcces.Repository
 			_dbSet.Add(Entity);
 		}
 
-		public T Get(Expression<Func<T, bool>> Filter)
+		public T Get(Expression<Func<T, bool>> Filter , string? IncludeProp = null)
 		{
 			IQueryable<T> quary = _dbSet;
 			quary = quary.Where(Filter);
-			return quary.FirstOrDefault();
 
+			if (!string.IsNullOrEmpty(IncludeProp))
+			{
+				foreach (var Include in IncludeProp.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+				{
+					quary = quary.Include(Include);
+				}
+			}
+			return quary.FirstOrDefault();
+			
 
 		}
 
-		public IEnumerable<T> GetAll()
+		public IEnumerable<T> GetAll(  Expression<Func<T, bool>>? Filter, string? IncludeProp = null)
 		{
 			IQueryable<T> quary = _dbSet;
+			if (Filter != null)
+			{
+
+				quary = quary.Where(Filter);
+
+
+			}
+
+            if (!string.IsNullOrEmpty(IncludeProp))
+			{
+				foreach (var Include in IncludeProp.Split(new char[] {','},StringSplitOptions.RemoveEmptyEntries))
+				{
+					quary = quary.Include(Include);
+				}
+			}
+
 			return quary.ToList();
 		}
 
@@ -49,12 +73,17 @@ namespace Ketab_DataAcces.Repository
 			_dbSet.RemoveRange(Entities);
 		}
 
-		public void Save()
+		public void save()
 		{
 			_db.SaveChanges();
 		}
 
-		public void update(T Entity)
+        public void Save()
+        {
+            _db.SaveChanges();
+        }
+
+        public void update(T Entity)
 		{
 			_dbSet.Update(Entity);
 		}

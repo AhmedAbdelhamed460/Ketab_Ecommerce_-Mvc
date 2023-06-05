@@ -10,6 +10,10 @@ namespace Ketab_DataAcces.IRepository
 	{
 		ICategoryReposatory category { get;  }
 		IProductReposatory Product { get; }
-
-	}
+		ICompanyRepository company { get; }
+        IShoppingCartRepository ShoppingCart { get; }
+		IApplicationUserRepository applicationUser { get; }
+		public void save();
+       
+    }
 }

@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
       <PrivateAssets>all</PrivateAssets>
@@ -24,6 +26,10 @@
     <ProjectReference Include="..\Bulky_DataAcces\Ketab_DataAcces.csproj" />
     <ProjectReference Include="..\Bulky_Models\Ketab_Models.csproj" />
     <ProjectReference Include="..\Bulky_Utility\Ketab_Utility.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\Product\" />
   </ItemGroup>
 
 </Project>
